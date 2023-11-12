@@ -32,5 +32,16 @@ import re
 
 def get_plate_type(plate):
     # ваше решение:
+    patterns = [
+        (r'^[АВЕКМНОРСТУХAEKMHOPCTYX]{1}\d{3}[АВЕКМНОРСТУХAEKMHOPCTYX]{2}\s\d{2}$', '1А'),
+        (r'^[АВЕКМНОРСТУХAEKMHOPCTYX]{2}\d{3}[АВЕКМНОРСТУХAEKMHOPCTYX]{1}\s\d{2}$', '1А'),
+        (r'^[АВЕКМНОРСТУХAEKMHOPCTYX]{2}\d{3}\s\d{2}$', '1Б'),
+        (r'^[АВЕКМНОРСТУХAEKMHOPCTYX]{2}\d{4}\s\d{2}$', '2'),
+        (r'^\d{4}[АВЕКМНОРСТУХAEKMHOPCTYX]{2}\s\d{2}$', '3')
+    ]
+
+    for pattern, plate_type in patterns:
+        if re.match(pattern, plate.upper()):
+            return plate_type
 
     return "Fail!"
